@@ -1,15 +1,14 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { AuthScreen } from "@/features/auth/components/auth-screen";
+"use client";
 
+// import { Button } from "@/components/ui/button";
+import { useAuthActions } from "@convex-dev/auth/react";
+import { UserButton } from "@/features/auth/components/user-button";
 export default function Home() {
+  const { signOut } = useAuthActions();
   return (
-    <div>
-      <AuthScreen />
+    <div className="min-h-screen flex items-center justify-center">
+      You are logged in user
+      <UserButton />
     </div>
   );
 }
