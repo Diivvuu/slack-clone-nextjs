@@ -31,7 +31,7 @@ export default function Home() {
     <div className="min-h-screen flex items-center justify-center">
       {/* You are logged in user */}
       {/* <Modals /> */}
-      <UserButton />
+      {/* <UserButton /> */}
     </div>
   );
 }
