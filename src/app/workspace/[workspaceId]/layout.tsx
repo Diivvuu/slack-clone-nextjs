@@ -11,7 +11,7 @@ import workSpaceId from "./page";
 import Toolbar from "./toolbar";
 import Sidebar from "./sidebar";
 
-import WorkspaceSidebar from "./workspace-siderbar";
+import WorkspaceSidebar from "./workspace-sidebar";
 
 interface WorkSpaceIdLayoutProps {
   children: React.ReactNode;
