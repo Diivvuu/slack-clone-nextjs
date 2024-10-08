@@ -1,36 +1,32 @@
-import { useMutation } from "convex/react";
-
-import { api } from "../../../../convex/_generated/api";
 import { useCallback, useMemo, useState } from "react";
 import { Id } from "../../../../convex/_generated/dataModel";
+import { useMutation } from "convex/react";
+import { api } from "../../../../convex/_generated/api";
+import { isSet } from "util/types";
 
-type RequestType = { name: string };
-type ResponseType = Id<"workspaces"> | null;
+type RequestType = { name: string; workspaceId: Id<"workspaces"> };
+type ResponseType = Id<"channels"> | null;
+
 type Options = {
   onSuccess?: (data: ResponseType) => void;
   onError?: (error: Error) => void;
-  onSeettled?: () => void;
+  onSettled?: () => void;
   throwError?: boolean;
 };
 
-export const useCreateWorkspace = () => {
+export const useCreateChannel = () => {
   const [data, setData] = useState<ResponseType>(null);
   const [error, setError] = useState<Error | null>(null);
   const [status, setStatus] = useState<
     "success" | "error" | "settled" | "pending" | null
   >(null);
 
-  // const [isPending, setIsPending] = useState(false);
-  // const [isSuccess, setIsSuccess] = useState(false);
-  // const [isError, setIsError] = useState(false);
-  // const [isSettled, setIsSettled] = useState(false);
-  //better use useMemo than usestate for each of 'em
   const isPending = useMemo(() => status === "pending", [status]);
   const isSuccess = useMemo(() => status === "success", [status]);
   const isError = useMemo(() => status === "error", [status]);
   const isSettled = useMemo(() => status === "settled", [status]);
 
-  const mutation = useMutation(api.workspaces.create);
+  const mutation = useMutation(api.channels.create);
 
   const mutate = useCallback(
     async (values: RequestType, options?: Options) => {
@@ -38,7 +34,6 @@ export const useCreateWorkspace = () => {
         setData(null);
         setError(null);
         setStatus("pending");
-
         const response = await mutation(values);
         options?.onSuccess?.(response);
         setStatus("success");
@@ -51,7 +46,7 @@ export const useCreateWorkspace = () => {
         }
       } finally {
         setStatus("settled");
-        options?.onSeettled?.();
+        options?.onSettled?.();
       }
     },
     [mutation]
