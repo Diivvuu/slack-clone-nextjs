@@ -1,17 +1,21 @@
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+
+import { useCreateChannel } from "../api/use-create-channel";
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
+import { useCreateChannelModal } from "../store/use-create-channel-modal";
+
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useCreateChannelModal } from "../store/use-create-channel-modal";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import React, { useState } from "react";
-import { useCreateChannel } from "../api/use-create-channel";
-import { useWorkspaceId } from "@/hooks/use-workspace-id";
 
 export const CreateChannelModal = () => {
+  const router = useRouter();
   const workspaceId = useWorkspaceId();
   const { mutate, isPending } = useCreateChannel();
 
@@ -33,7 +37,7 @@ export const CreateChannelModal = () => {
       { name, workspaceId },
       {
         onSuccess: (id) => {
-          //todo : redirect to that channel
+          router.push(`/workspace/${workspaceId}/channel/${id}`);
           handleClose();
         },
       }
