@@ -63,7 +63,7 @@ const WorkspaceSidebar = () => {
         <SidebarItem label="Drafts & Sent" icon={SendHorizonal} id="drafts" />
       </div>
       <WorkspaceSection
-        label="Channels name"
+        label="Channels"
         hint="New Channel"
         onNew={() => {
           member.role === "admin" ? setOpen(true) : undefined;
