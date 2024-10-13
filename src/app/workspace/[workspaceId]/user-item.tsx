@@ -34,7 +34,6 @@ export const UserItem = ({
 }: UserItemProps) => {
   const workspaceId = useWorkspaceId();
   const avatarFallback = label.charAt(0).toUpperCase();
-  console.log(id, label, image);
   return (
     <Button
       variant="transparent"
