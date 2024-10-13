@@ -84,7 +84,18 @@ const Editor = ({
             enter: {
               key: "Enter",
               handler: () => {
-                return; //todo submit form
+                const text = quill.getText();
+                const addedImage = ImageElementRef.current?.files?.[0] || null;
+
+                const isEmpty =
+                  !addedImage &&
+                  text.replace(/<(.|\n)*?>/g, "").trim().length === 0;
+
+                if (isEmpty) return;
+
+                const body = JSON.stringify(quill.getContents());
+                submitRef.current?.({ body, image: addedImage });
+                return;
               },
             },
             shift_enter: {
@@ -127,7 +138,7 @@ const Editor = ({
     };
   }, [innerRef, containerRef]); //may add innerRef in deps later
 
-  const isEmpty = text.replace(/<(.|\n)*?>/g, "").trim().length === 0;
+  const isEmpty = !image && text.replace(/<(.|\n)*?>/g, "").trim().length === 0;
 
   const toggleToolbar = () => {
     setIsToolbarVisible((current) => !current);
@@ -211,7 +222,12 @@ const Editor = ({
           {variant === "create" ? (
             <Button
               disabled={disabled || isEmpty}
-              onClick={() => {}}
+              onClick={() =>
+                onSubmit({
+                  body: JSON.stringify(quillRef.current?.getContents()),
+                  image,
+                })
+              }
               className={cn(
                 "ml-auto",
                 !isEmpty
@@ -227,14 +243,19 @@ const Editor = ({
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => {}}
+                onClick={onCancel}
                 disabled={disabled || isEmpty}
               >
                 Cancel
               </Button>
               <Button
                 size="sm"
-                onClick={() => {}}
+                onClick={() =>
+                  onSubmit({
+                    body: JSON.stringify(quillRef.current?.getContents()),
+                    image,
+                  })
+                }
                 disabled={false}
                 className="bg-[#007a5a] hover:bg-[#007a5a]/80 text-white"
               >
