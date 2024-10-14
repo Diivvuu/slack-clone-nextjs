@@ -73,7 +73,6 @@ const Editor = ({
     const editorContainer = container.appendChild(
       container.ownerDocument.createElement("div")
     );
-    console.log(container, editorContainer);
     const options: QuillOptions = {
       theme: "snow",
       placeholder: placeholderRef.current,

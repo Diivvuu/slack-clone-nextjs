@@ -29,9 +29,7 @@ export const EmojiPopover = ({
   };
 
   const onSelect = (emoji: any) => {
-    console.log("selected", emoji);
     onEmojiSelect(emoji);
-    console.log("sent");
     setPopoverOpen(false);
 
     setTimeout(() => {
