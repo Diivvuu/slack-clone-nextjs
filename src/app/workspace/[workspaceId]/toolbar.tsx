@@ -3,7 +3,6 @@ import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspace";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { Info, Search } from "lucide-react";
 import React, { useEffect } from "react";
-import workSpaceId from "./page";
 
 const Toolbar = () => {
   const workspaceId = useWorkspaceId();
