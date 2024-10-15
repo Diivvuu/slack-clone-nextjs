@@ -37,6 +37,19 @@ interface EditorProps {
   variant?: "create" | "update";
 }
 
+const toolbarOptions = [
+  ["bold", "italic", "underline", "strike"], // toggled buttons
+  ["blockquote", "code-block"],
+  ["link", "formula"],
+
+  [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
+
+  [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+  [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+  [{ font: [] }],
+];
+
 const Editor = ({
   onCancel,
   onSubmit,
@@ -78,6 +91,7 @@ const Editor = ({
       placeholder: placeholderRef.current,
 
       modules: {
+        toolbar: toolbarOptions,
         keyboard: {
           bindings: {
             enter: {
