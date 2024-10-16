@@ -1,30 +1,31 @@
 "use client";
+import React from "react";
+import { Id } from "../../../../convex/_generated/dataModel";
+
 import { usePanel } from "@/hooks/use-panel";
 
+import { Threads } from "@/features/messages/components/thread";
+import { Profile } from "@/features/members/components/profile";
+
+import Toolbar from "./toolbar";
+import Sidebar from "./sidebar";
+import WorkspaceSidebar from "./workspace-sidebar";
+
+import { Loader } from "lucide-react";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 
-import React, { Children } from "react";
-import workSpaceId from "./page";
-import Toolbar from "./toolbar";
-import Sidebar from "./sidebar";
-
-import WorkspaceSidebar from "./workspace-sidebar";
-import { Loader } from "lucide-react";
-import { Threads } from "@/features/messages/components/thread";
-import { Id } from "../../../../convex/_generated/dataModel";
-
 interface WorkSpaceIdLayoutProps {
   children: React.ReactNode;
 }
 
 const layout = ({ children }: WorkSpaceIdLayoutProps) => {
-  const { parentMessageId, onClose } = usePanel();
+  const { parentMessageId, profileMemberId, onClose } = usePanel();
   //helps to detect ?parentMessageId in url
-  const showPanel = !!parentMessageId;
+  const showPanel = !!parentMessageId || !!profileMemberId;
   return (
     <div className="h-full">
       <Toolbar />
@@ -51,6 +52,11 @@ const layout = ({ children }: WorkSpaceIdLayoutProps) => {
                 {parentMessageId ? (
                   <Threads
                     messageId={parentMessageId as Id<"messages">}
+                    onClose={onClose}
+                  />
+                ) : profileMemberId ? (
+                  <Profile
+                    memberId={profileMemberId as Id<"members">}
                     onClose={onClose}
                   />
                 ) : (
