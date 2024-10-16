@@ -21,7 +21,7 @@ const Renderer = dynamic(() => import("@/components/renderer"), { ssr: false });
 const Editor = dynamic(() => import("@/components/editor"), { ssr: false });
 interface MessageProps {
   id: Id<"messages">;
-  memberId: Id<"members">;
+  memberId: Id<"members"> ;
   authorImage?: string;
   authorName?: string;
   isAuthor: boolean;
@@ -31,7 +31,7 @@ interface MessageProps {
       memberIds: Id<"members">[];
     }
   >;
-  body: Doc<"messages">["body"];
+  body: Doc<"messages">["body"] ;
   image: string | null | undefined;
   createdAt: Doc<"messages">["_creationTime"];
   updatedAt: Doc<"messages">["updatedAt"];
