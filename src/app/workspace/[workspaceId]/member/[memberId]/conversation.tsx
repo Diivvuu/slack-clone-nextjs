@@ -38,12 +38,12 @@ export const Conversations = ({ id }: ConversationProps) => {
       />
       <MessageList
         data={results}
-        variant="channel"
+        variant="conversation"
         memberImage={member?.user.image}
         memberName={member?.user.name}
         loadMore={loadMore}
-        canLoadMore={status === "CanLoadMore"}
         isLoadingMore={status === "LoadingMore"}
+        canLoadMore={status === "CanLoadMore"}
       />
       <ChatInput
         placeholder={`Message ${member?.user.name}`}
