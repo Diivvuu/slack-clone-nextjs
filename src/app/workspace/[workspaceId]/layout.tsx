@@ -1,4 +1,5 @@
 "use client";
+import { usePanel } from "@/hooks/use-panel";
 
 import {
   ResizableHandle,
@@ -12,12 +13,18 @@ import Toolbar from "./toolbar";
 import Sidebar from "./sidebar";
 
 import WorkspaceSidebar from "./workspace-sidebar";
+import { Loader } from "lucide-react";
+import { Threads } from "@/features/messages/components/thread";
+import { Id } from "../../../../convex/_generated/dataModel";
 
 interface WorkSpaceIdLayoutProps {
   children: React.ReactNode;
 }
 
 const layout = ({ children }: WorkSpaceIdLayoutProps) => {
+  const { parentMessageId, onClose } = usePanel();
+  //helps to detect ?parentMessageId in url
+  const showPanel = !!parentMessageId;
   return (
     <div className="h-full">
       <Toolbar />
@@ -29,16 +36,31 @@ const layout = ({ children }: WorkSpaceIdLayoutProps) => {
         >
           <ResizablePanel
             defaultSize={20}
-            minSize={11}  
+            minSize={11}
             className="bg-[#5e2c5f]"
           >
             <WorkspaceSidebar />
             <div>Channels Siderbar</div>
           </ResizablePanel>
           <ResizableHandle withHandle />
-          <ResizablePanel minSize={20}>
-            {children}
-          </ResizablePanel>
+          <ResizablePanel minSize={20}>{children}</ResizablePanel>
+          {showPanel && (
+            <>
+              <ResizableHandle withHandle />
+              <ResizablePanel minSize={20} defaultSize={29}>
+                {parentMessageId ? (
+                  <Threads
+                    messageId={parentMessageId as Id<"messages">}
+                    onClose={onClose}
+                  />
+                ) : (
+                  <div className="flex h-full items-center justify-center">
+                    <Loader className="size-5 animate-spin text-muted-foreground" />
+                  </div>
+                )}
+              </ResizablePanel>
+            </>
+          )}
         </ResizablePanelGroup>
       </div>
     </div>
