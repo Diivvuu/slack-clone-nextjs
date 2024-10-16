@@ -306,6 +306,7 @@ export const create = mutation({
       channelId: args.channelId,
       workspaceId: args.workspaceId,
       parentMessageId: args.parentMessageId,
+      conversationId: args.conversationId,
     });
 
     return messageId;

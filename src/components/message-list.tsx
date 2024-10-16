@@ -3,7 +3,7 @@ import { GetMessageReturnType } from "@/features/messages/api/use-get-messages";
 import { Message } from "./message";
 import { channel } from "diagnostics_channel";
 import { ChannelHero } from "./channel-hero";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Id } from "../../convex/_generated/dataModel";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { useCurrentMember } from "@/features/members/api/use-current-member";
@@ -64,6 +64,7 @@ export const MessageList = ({
     },
     {} as Record<string, typeof data>
   );
+
   return (
     <div className="flex-1 flex flex-col-reverse pb-4 overflow-y-auto messages-scrollbar">
       {Object.entries(groupedMessages || {}).map(([dateKey, messages]) => (
@@ -108,22 +109,23 @@ export const MessageList = ({
           })}
         </div>
       ))}
-      <div className="h-1" 
-      ref = {(el) => {
-        if(el) {
-          const observer = new IntersectionObserver(
-            ([entry]) => {
-              if(entry.isIntersecting && canLoadMore) {
-                loadMore()
-              }
-            },
-            {threshold : 1.0}
-
-          )
-          observer.observe(el)
-          return () => observer.disconnect()
-        }
-      }}/>
+      <div
+        className="h-1"
+        ref={(el) => {
+          if (el) {
+            const observer = new IntersectionObserver(
+              ([entry]) => {
+                if (entry.isIntersecting && canLoadMore) {
+                  loadMore();
+                }
+              },
+              { threshold: 1.0 }
+            );
+            observer.observe(el);
+            return () => observer.disconnect();
+          }
+        }}
+      />
       {isLoadingMore && (
         <div className="text-center my-2 relative">
           <hr className="absolute top-1/2 left-0 right-0 border-t border-gray-300" />
