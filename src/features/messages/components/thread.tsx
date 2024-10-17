@@ -18,7 +18,7 @@ import { useChannelId } from "@/hooks/use-channel-id";
 import { toast } from "sonner";
 import { differenceInMinutes, format, isToday, isYesterday } from "date-fns";
 
-const Editor = dynamic(() => import("@/components/editor"), { ssr: false });
+const Editor = dynamic(() => import("@/components/Editor"), { ssr: false });
 
 const TIME_THRESHOLD = 10;
 interface ThreadsProps {
@@ -120,7 +120,6 @@ export const Threads = ({ messageId, onClose }: ThreadsProps) => {
     // Replace double hyphens with single hyphen
     const correctedDateStr = dateStr.replace(/--/g, "-");
     const date = new Date(correctedDateStr);
-
 
     if (isToday(date)) return "Today";
     if (isYesterday(date)) return "Yesterday";
