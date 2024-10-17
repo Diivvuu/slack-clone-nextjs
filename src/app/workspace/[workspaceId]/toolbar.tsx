@@ -1,3 +1,4 @@
+import { Hint } from "@/components/hint";
 import { Button } from "@/components/ui/button";
 import {
   CommandDialog,
@@ -74,9 +75,20 @@ const Toolbar = () => {
         </CommandDialog>
       </div>
       <div className="ml-auto flex-1 flex items-center justify-end">
-        <Button variant="transparent" className="iconSm">
-          <Info className="size-4 text-white" />
-        </Button>
+        <Hint label="created by Divyanshu">
+          <Button
+            variant="transparent"
+            className="iconSm"
+            onClick={() =>
+              window.open(
+                "https://github.com/Diivvuu/slack-clone-nextjs",
+                "_blank"
+              )
+            }
+          >
+            <Info className="size-4 text-white" />
+          </Button>
+        </Hint>
       </div>
     </div>
   );
