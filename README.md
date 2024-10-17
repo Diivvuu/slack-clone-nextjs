@@ -1,8 +1,14 @@
 # Slack Clone with Next.js & Convex
 
-![Project Image](#) <!-- ss -->
+![image](https://github.com/user-attachments/assets/15c981cc-3649-4e77-ba19-1c9dc9bdf082)
+
 
 This is a fully-functional Slack clone built with Next.js and Convex as the backend database and authentication provider. It allows you to create workspaces, manage channels, direct messages (DMs), react to messages, and much more, just like Slack! You can fork it, contribute to it, or just run it locally and customize it to your needs.
+
+feel free to login with these credentials and explore the functionality
+ - johnmail@gmail.com Password123! 
+ - alicemail@gmail.com Password213!
+(these 2 credentials are already in sample workspace and you can create more workspaces, channel, invite more people via joincode, feel free to explore)
 
 ## Features
 
@@ -18,8 +24,13 @@ This is a fully-functional Slack clone built with Next.js and Convex as the back
 - *Real-time Updates*: Messages and reactions update in real-time without refreshing the page.
 
 ## Screenshots
+![image](https://github.com/user-attachments/assets/fcce8263-eae2-4e2f-928f-55da6c5b1d99)
+![image](https://github.com/user-attachments/assets/8b755731-38fa-467c-97a1-59f5882fe2be)
+![image](https://github.com/user-attachments/assets/3c5f6c51-062e-40de-be16-6a7446f7533b)
+![image](https://github.com/user-attachments/assets/0dbd04f9-3fcb-4e9f-b2e3-0998c32ae69c)
+![image](https://github.com/user-attachments/assets/25d656c1-888e-4635-98e1-f37bc235ef27)
+![image](https://github.com/user-attachments/assets/b2582d70-e4ea-45f3-b88a-4e6094494323)
 
-<!-- Attach relevant screenshots of your UI -->
 
 ## Getting Started
 
