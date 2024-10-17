@@ -1,5 +1,6 @@
 # Slack Clone with Next.js & Convex  
- - [SLACK](https://slack-clone-nextjs.vercel.app/)
+ [deployed link here](https://slack-clone-nextjs.vercel.app/)
+
 ![image](https://github.com/user-attachments/assets/15c981cc-3649-4e77-ba19-1c9dc9bdf082)
 
 
