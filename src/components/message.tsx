@@ -19,7 +19,7 @@ import { usePanel } from "@/hooks/use-panel";
 import { ThreadBar } from "./thread-bar";
 
 const Renderer = dynamic(() => import("@/components/renderer"), { ssr: false });
-const Editor = dynamic(() => import("@/components/editor"), { ssr: false });
+const Editor = dynamic(() => import("@/components/Editor"), { ssr: false });
 interface MessageProps {
   id: Id<"messages">;
   memberId: Id<"members">;
