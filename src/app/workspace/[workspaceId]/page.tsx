@@ -10,7 +10,7 @@ import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspace";
 
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 
-const workSpaceId = () => {
+const WorkSpaceId = () => {
   const router = useRouter();
   const workspaceId = useWorkspaceId();
   const [open, setOpen] = useCreateChannelModal();
@@ -53,7 +53,7 @@ const workSpaceId = () => {
     open,
     setOpen,
     router,
-    workSpaceId,
+    workspaceId,
   ]);
 
   if (workspaceLoading || channelsLoading || memberLoading)
@@ -84,4 +84,4 @@ const workSpaceId = () => {
   return null;
 };
 
-export default workSpaceId;
+export default WorkSpaceId;

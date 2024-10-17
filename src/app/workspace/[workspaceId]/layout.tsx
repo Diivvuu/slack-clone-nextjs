@@ -22,7 +22,7 @@ interface WorkSpaceIdLayoutProps {
   children: React.ReactNode;
 }
 
-const layout = ({ children }: WorkSpaceIdLayoutProps) => {
+const Layout = ({ children }: WorkSpaceIdLayoutProps) => {
   const { parentMessageId, profileMemberId, onClose } = usePanel();
   //helps to detect ?parentMessageId in url
   const showPanel = !!parentMessageId || !!profileMemberId;
@@ -75,4 +75,4 @@ const layout = ({ children }: WorkSpaceIdLayoutProps) => {
   );
 };
 
-export default layout;
+export default Layout;
