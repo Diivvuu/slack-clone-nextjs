@@ -6,8 +6,8 @@
 This is a fully-functional Slack clone built with Next.js and Convex as the backend database and authentication provider. It allows you to create workspaces, manage channels, direct messages (DMs), react to messages, and much more, just like Slack! You can fork it, contribute to it, or just run it locally and customize it to your needs.
 
 feel free to login with these credentials and explore the functionality
-johnmail@gmail.com Password123! 
-alicemail@gmail.com Password123!
+ - johnmail@gmail.com Password123! 
+ - alicemail@gmail.com Password213!
 (these 2 credentials are already in sample workspace and you can create more workspaces, channel, invite more people via joincode, feel free to explore)
 
 ## Features
