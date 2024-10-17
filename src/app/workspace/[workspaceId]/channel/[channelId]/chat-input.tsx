@@ -8,7 +8,7 @@ import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { Id } from "../../../../../../convex/_generated/dataModel";
 
-const Editor = dynamic(() => import("@/components/editor"), { ssr: false });
+const Editor = dynamic(() => import("@/components/Editor"), { ssr: false });
 
 interface ChatInputProps {
   placeholder: string;
