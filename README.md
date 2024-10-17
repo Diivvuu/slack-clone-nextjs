@@ -1,4 +1,4 @@
-# Slack Clone with Next.js & Convex  
+![image](https://github.com/user-attachments/assets/26f12129-2fbb-46c9-b9c8-3c42975347f1)# Slack Clone with Next.js & Convex  
  [deployed link here](https://slack-clone-nextjs.vercel.app/)
 
 ![image](https://github.com/user-attachments/assets/15c981cc-3649-4e77-ba19-1c9dc9bdf082)
@@ -25,6 +25,7 @@ feel free to login with these credentials and explore the functionality
 - *Real-time Updates*: Messages and reactions update in real-time without refreshing the page.
 
 ## Screenshots
+![image](https://github.com/user-attachments/assets/b7c0d636-2fef-448e-ac4f-4e9c06052f52)
 ![image](https://github.com/user-attachments/assets/fcce8263-eae2-4e2f-928f-55da6c5b1d99)
 ![image](https://github.com/user-attachments/assets/8b755731-38fa-467c-97a1-59f5882fe2be)
 ![image](https://github.com/user-attachments/assets/3c5f6c51-062e-40de-be16-6a7446f7533b)
