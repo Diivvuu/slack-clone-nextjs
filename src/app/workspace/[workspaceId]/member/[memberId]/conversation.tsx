@@ -20,7 +20,6 @@ export const Conversations = ({ id }: ConversationProps) => {
   const { data: member, isLoading: memberLoading } = useGetMember({
     id: memberId,
   });
-  console.log(member);
   const { results, status, loadMore } = useGetMessages({
     conversationId: id,
   });

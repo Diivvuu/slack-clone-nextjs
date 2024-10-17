@@ -24,13 +24,9 @@ interface MessageListProps {
 }
 
 const formatDateLabel = (dateStr: string) => {
-  console.log(dateStr);
-
   // Replace double hyphens with single hyphen
   const correctedDateStr = dateStr.replace(/--/g, "-");
   const date = new Date(correctedDateStr);
-
-  console.log(date);
 
   if (isToday(date)) return "Today";
   if (isYesterday(date)) return "Yesterday";

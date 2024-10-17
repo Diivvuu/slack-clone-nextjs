@@ -62,7 +62,6 @@ export const Threads = ({ messageId, onClose }: ThreadsProps) => {
     body: string;
     image: File | null;
   }) => {
-    console.log(body, image);
     try {
       setPending(true);
       editorRef?.current?.enable(false);
@@ -118,13 +117,10 @@ export const Threads = ({ messageId, onClose }: ThreadsProps) => {
   );
 
   const formatDateLabel = (dateStr: string) => {
-    console.log(dateStr);
-
     // Replace double hyphens with single hyphen
     const correctedDateStr = dateStr.replace(/--/g, "-");
     const date = new Date(correctedDateStr);
 
-    console.log(date);
 
     if (isToday(date)) return "Today";
     if (isYesterday(date)) return "Yesterday";

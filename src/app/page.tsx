@@ -24,7 +24,7 @@ export default function Home() {
     } else if (!open) {
       setOpen(true);
     } else {
-      console.log("open creation mdoel");
+      console.log("open creation model");
     }
   }, [workspaceId, isLoading, open, setOpen]);
   return (

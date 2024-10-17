@@ -26,7 +26,6 @@ export const useGetMessages = ({
     },
     { initialNumItems: BATCH_SIZE }
   );
-  console.log(results, status, loadMore);
   return {
     results,
     status,
