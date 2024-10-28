@@ -26,10 +26,11 @@ export const ThreadsBar = ({
 }: ThreadsBarProps) => {
   const router = useRouter();
   const workspaceId = useWorkspaceId();
+  const SendChannelId = channelId ? channelId : ("" as Id<"channels">);
   const avatarFallback = name.charAt(0).toUpperCase();
-  const { data: channelData, isLoading: ChannelLoading } = channelId
-    ? useGetChannel({ id: channelId })
-    : { data: null, isLoading: false };
+  const { data: channelData, isLoading: ChannelLoading } = useGetChannel({
+    id: SendChannelId,
+  });
   console.log("channelid", channelId);
   const onClick = () => {
     router.push(
