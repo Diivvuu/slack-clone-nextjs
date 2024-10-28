@@ -1,6 +1,7 @@
 "use client";
 
 import { ThreadsBar } from "@/components/threads-bar";
+import { ThreadsBarMember } from "@/components/threads-bar-member";
 import { useGetWorkspaceMessages } from "@/features/messages/api/use-get-all-messages";
 import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspace";
 import { usePanel } from "@/hooks/use-panel";
@@ -57,18 +58,31 @@ const ThreadPage = () => {
                     key={index}
                     className="flex items-center justify-start gap-x-4 mt-8"
                   >
-                    <ThreadsBar
-                      memberId={message.memberId}
-                      channelId={message.channelId}
-                      count={message.threadCount}
-                      image={message.threadImage}
-                      name={message.threadName}
-                      timestamp={message.threadTimestamp}
-                      onClick={() => {
-                        // onOpenMessage(message._id);
-                      }}
-                    />
-                    {/* <div>{message.channelId}</div> */}
+                    {message.channelId ? (
+                      <ThreadsBar
+                        // memberId={message.memberId}
+                        channelId={message.channelId}
+                        count={message.threadCount}
+                        image={message.threadImage}
+                        name={message.threadName}
+                        timestamp={message.threadTimestamp}
+                        onClick={() => {
+                          // onOpenMessage(message._id);
+                        }}
+                      />
+                    ) : (
+                      <ThreadsBarMember
+                        memberId={message.memberId}
+                        // channelId={message.channelId}
+                        count={message.threadCount}
+                        image={message.threadImage}
+                        name={message.threadName}
+                        timestamp={message.threadTimestamp}
+                        onClick={() => {
+                          // onOpenMessage(message._id);
+                        }}
+                      />
+                    )}
                   </div>
                 );
               })}

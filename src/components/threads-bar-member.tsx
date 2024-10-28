@@ -5,10 +5,10 @@ import { Id } from "../../convex/_generated/dataModel";
 import { useGetChannel } from "@/features/channels/api/use-get-channel";
 import { useRouter } from "next/navigation";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
+import { useGetMember } from "@/features/members/api/use-get-member";
 
 interface ThreadsBarProps {
-  // memberId?: Id<"members">;
-  channelId: Id<"channels">;
+  memberId: Id<"members">;
   count?: number;
   image?: string;
   name?: string;
@@ -16,9 +16,8 @@ interface ThreadsBarProps {
   onClick?: () => void;
 }
 
-export const ThreadsBar = ({
-  // memberId,
-  channelId,
+export const ThreadsBarMember = ({
+  memberId,
   count,
   image,
   name = "Member",
@@ -28,17 +27,17 @@ export const ThreadsBar = ({
   const workspaceId = useWorkspaceId();
   // const SendChannelId = channelId ? channelId : ("" as Id<"channels">);
   const avatarFallback = name.charAt(0).toUpperCase();
-  const { data: channelData, isLoading: ChannelLoading } = useGetChannel({
-    id: channelId,
+  const { data: MemberData, isLoading: MemberLoading } = useGetMember({
+    id: memberId,
   });
-  console.log("channelid", channelId);
+  console.log("new", MemberData);
   const onClick = () => {
-    router.push(`/workspace/${workspaceId}/channel/${channelId}`);
+    router.push(`/workspace/${workspaceId}/member/${memberId}`);
   };
   if (!count || !timestamp) return null;
   return (
     <div className="flex flex-col">
-      <div>{"#" + channelData?.name}</div>
+      <div>{"#" + MemberData?.user?.name}</div>
       <button
         onClick={onClick}
         className="p-1 rounded-md hover:bg-white border border-transparent hover:border-border flex items-center justify-start group/thread-bar transition max-w-[600px]"
