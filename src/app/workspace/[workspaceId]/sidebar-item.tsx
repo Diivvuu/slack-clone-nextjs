@@ -23,6 +23,7 @@ const SidebarItemVariants = cva(
 );
 
 interface SidebarItemProps {
+  isChannel: boolean;
   label: string;
   id: string;
   icon: LucideIcon | IconType;
@@ -30,6 +31,7 @@ interface SidebarItemProps {
 }
 
 export const SidebarItem = ({
+  isChannel,
   label,
   id,
   icon: Icon,
@@ -43,7 +45,13 @@ export const SidebarItem = ({
       asChild
       className={cn(SidebarItemVariants({ variant }))}
     >
-      <Link href={`/workspace/${workspaceId}/channel/${id}`}>
+      <Link
+        href={
+          isChannel
+            ? `/workspace/${workspaceId}/channel/${id}`
+            : `/workspace/${workspaceId}/threads`
+        }
+      >
         <Icon className="size-3.5 mr-1 shrink-0" />
         <span className="text-sm truncate">{label}</span>
       </Link>

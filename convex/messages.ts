@@ -277,6 +277,92 @@ export const get = query({
   },
 });
 
+export const getAllWorkspaceMessages = query({
+  args: {
+    workspaceId: v.id("workspaces"),
+    paginationOpts: paginationOptsValidator,
+  },
+  handler: async (ctx, args) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) throw new Error("Unauthorized");
+
+    const results = await ctx.db
+      .query("messages")
+      .withIndex("by_workspace_id", (q) =>
+        q.eq("workspaceId", args.workspaceId)
+      )
+      .order("desc")
+      .paginate(args.paginationOpts);
+
+    return {
+      ...results,
+      page: (
+        await Promise.all(
+          results.page.map(async (message) => {
+            const member = await populateMember(ctx, message.memberId);
+            const user = member ? await populateUser(ctx, member.userId) : null;
+
+            if (!member || !user) return null;
+
+            const reactions = await populateReactions(ctx, message._id);
+            const thread = await populateThread(ctx, message._id);
+            const image = message.image
+              ? await ctx.storage.getUrl(message.image)
+              : undefined;
+
+            const reactionsWithCounts = reactions.map((reaction) => {
+              return {
+                ...reaction,
+                count: reactions.filter((r) => r.value === reaction.value)
+                  .length,
+              };
+            });
+
+            const dedupedReactions = reactionsWithCounts.reduce(
+              (acc, reaction) => {
+                const existingReaction = acc.find(
+                  (r) => r.value === reaction.value
+                );
+                if (existingReaction) {
+                  existingReaction.memberIds = Array.from(
+                    new Set([...existingReaction.memberIds, reaction.memberId])
+                  );
+                } else {
+                  acc.push({ ...reaction, memberIds: [reaction.memberId] });
+                }
+                return acc;
+              },
+              [] as (Doc<"reactions"> & {
+                count: number;
+                memberIds: Id<"members">[];
+              })[]
+            );
+
+            const reactionsWithoutMemberIdProperty = dedupedReactions.map(
+              ({ memberId, ...rest }) => rest
+            );
+
+            return {
+              ...message,
+              image,
+              member,
+              user,
+              reactions: reactionsWithoutMemberIdProperty,
+              threadCount: thread.count,
+              threadImage: thread.image,
+              threadName: thread.name,
+              threadTimestamp: thread.timeStamp,
+            };
+          })
+        )
+      ).filter(
+        (message): message is NonNullable<typeof message> => message !== null
+      ),
+    };
+  },
+});
+
+
 export const create = mutation({
   args: {
     body: v.string(),

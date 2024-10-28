@@ -61,8 +61,18 @@ const WorkspaceSidebar = () => {
         isAdmin={member.role === "admin"}
       />
       <div className="flex flex-col px-2 mt-3">
-        <SidebarItem label="Threads" icon={MessageSquareText} id="threads" />
-        <SidebarItem label="Drafts & Sent" icon={SendHorizonal} id="drafts" />
+        <SidebarItem
+          isChannel={false}
+          label="Threads"
+          icon={MessageSquareText}
+          id="threads"
+        />
+        <SidebarItem
+          isChannel={false}
+          label="Drafts & Sent"
+          icon={SendHorizonal}
+          id="drafts"
+        />
       </div>
       <WorkspaceSection
         label="Channels"
@@ -73,6 +83,7 @@ const WorkspaceSidebar = () => {
       >
         {channels?.map((item) => (
           <SidebarItem
+            isChannel={true}
             key={item._id}
             icon={HashIcon}
             label={item.name}
