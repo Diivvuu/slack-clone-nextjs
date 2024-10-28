@@ -19,8 +19,12 @@ import { WorkspaceSection } from "./workspace-section";
 import { UserItem } from "./user-item";
 import { useCreateChannelModal } from "@/features/channels/store/use-create-channel-modal";
 import { useMemberId } from "@/hooks/use-member-id";
+import { usePathname } from "next/navigation";
 
 const WorkspaceSidebar = () => {
+  const pathname = usePathname();
+  const isThreadsUrl = pathname.endsWith("threads");
+  const isDraftUrl = pathname.endsWith("drafts");
   const memberId = useMemberId();
   const workspaceId = useWorkspaceId();
   const channelId = useChannelId(); // active channel's id
@@ -66,13 +70,17 @@ const WorkspaceSidebar = () => {
           label="Threads"
           icon={MessageSquareText}
           id="threads"
+          variant={isThreadsUrl ? "active" : "default"}
         />
-        <SidebarItem
-          isChannel={false}
-          label="Drafts & Sent"
-          icon={SendHorizonal}
-          id="drafts"
-        />
+        <a href={`/workspace/${workspaceId}/drafts`}>
+          <SidebarItem
+            isChannel={undefined}
+            label="Drafts & Sent"
+            icon={SendHorizonal}
+            id="drafts"
+            variant={isDraftUrl ? "active" : "default"}
+          />
+        </a>
       </div>
       <WorkspaceSection
         label="Channels"

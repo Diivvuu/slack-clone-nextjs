@@ -1,17 +1,13 @@
 "use client";
 
-import { ThreadBar } from "@/components/thread-bar";
+import { ThreadsBar } from "@/components/threads-bar";
 import { useGetWorkspaceMessages } from "@/features/messages/api/use-get-all-messages";
-import { useGetMessages } from "@/features/messages/api/use-get-messages";
 import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspace";
-import { useGetWorkspaceInfo } from "@/features/workspaces/api/use-get-workspace-info";
-import { useChannelId } from "@/hooks/use-channel-id";
 import { usePanel } from "@/hooks/use-panel";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { format } from "date-fns";
 
 const ThreadPage = () => {
-  const { parentMessageId, onOpenProfile, onOpenMessage, onClose } = usePanel();
   const workspaceId = useWorkspaceId();
   const { data: workspaceInfo, isLoading: workspaceInfoLoading } =
     useGetWorkspace({ id: workspaceId });
@@ -22,7 +18,7 @@ const ThreadPage = () => {
   } = useGetWorkspaceMessages({
     workspaceId,
   });
-  console.log(workspaceInfo);
+  console.log(data);
   const groupedMessages = data?.reduce(
     (groups, message) => {
       const date = new Date(message._creationTime);
@@ -53,21 +49,29 @@ const ThreadPage = () => {
         {/* {Object.entries(groupedMessages || {}).map(([dateKey, messages]) => ( */}
         {Object.entries(groupedMessages || {}).map(([dataKey, messages]) => (
           <div key={dataKey}>
-            {messages.map((message, index) => {
-              return (
-                <div key={index} className="mt-8">
-                  <ThreadBar
-                    count={message.threadCount}
-                    image={message.threadImage}
-                    name={message.threadName}
-                    timestamp={message.threadTimestamp}
-                    onClick={() => {
-                      onOpenMessage(message._id);
-                    }}
-                  />
-                </div>
-              );
-            })}
+            {messages
+              .filter((message) => message.threadCount > 0)
+              .map((message, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="flex items-center justify-start gap-x-4 mt-8"
+                  >
+                    <ThreadsBar
+                      memberId={message.memberId}
+                      channelId={message.channelId}
+                      count={message.threadCount}
+                      image={message.threadImage}
+                      name={message.threadName}
+                      timestamp={message.threadTimestamp}
+                      onClick={() => {
+                        // onOpenMessage(message._id);
+                      }}
+                    />
+                    {/* <div>{message.channelId}</div> */}
+                  </div>
+                );
+              })}
           </div>
         ))}
       </div>

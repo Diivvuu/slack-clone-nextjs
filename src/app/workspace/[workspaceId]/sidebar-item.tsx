@@ -47,9 +47,11 @@ export const SidebarItem = ({
     >
       <Link
         href={
-          isChannel
-            ? `/workspace/${workspaceId}/channel/${id}`
-            : `/workspace/${workspaceId}/threads`
+          isChannel === undefined
+            ? `/workspace/${workspaceId}/drafts`
+            : isChannel === true
+              ? `/workspace/${workspaceId}/channel/${id}`
+              : `/workspace/${workspaceId}/threads`
         }
       >
         <Icon className="size-3.5 mr-1 shrink-0" />
